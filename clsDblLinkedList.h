@@ -12,6 +12,16 @@ private:
 
 	int _Size = 0;
 
+	class Node;
+
+	void _Swap(Node* &N1,Node* &N2)
+	{
+		Node* Temp = new Node();
+
+		Temp->Value = N1->Value;
+		N1->Value = N2->Value;
+		N2->Value = Temp->Value;
+	}
 
 public:
 
@@ -205,5 +215,24 @@ public:
 		while (_Size > 0)
 			DeleteFirstNode();
 	}
+
+	void Reverse()
+	{
+
+		Node* Current = Head;
+		Node* Temp = nullptr;
+
+		while (Current != nullptr)
+		{
+			Temp = Current->prev;
+			Current->prev = Current->next;
+			Current->next = Temp;
+			Current = Current->prev;
+		}
+
+		if (Temp != nullptr)
+			Head = Temp->prev;
+	}
+
 
 };
