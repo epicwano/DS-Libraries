@@ -42,6 +42,8 @@ public:
 	{
 		Node* TempHead = Head;
 
+		cout << "\n";
+
 		while (TempHead != NULL) {
 			cout << TempHead->Value << " ";
 			TempHead = TempHead->next;
@@ -109,6 +111,72 @@ public:
 
 	}
 
+	void DeleteNode(Node*& NodeToDelete)
+	{
+
+		if (Head == NULL || NodeToDelete == NULL)
+			return;
+
+
+		if (Head == NodeToDelete)
+			Head = NodeToDelete->next;
+
+		if (NodeToDelete->next != NULL)
+			NodeToDelete->next->prev = NodeToDelete->prev;
+
+		if (NodeToDelete->prev != NULL)
+			NodeToDelete->prev->next = NodeToDelete->next;
+
+
+		delete NodeToDelete;
+
+	}
+
+	void DeleteFirstNode()
+	{
+
+		if (Head == NULL)
+			return;
+
+
+		Node* FirstNode = Head;
+
+		Head = FirstNode->next;
+
+		if (Head != NULL)
+			Head->prev = NULL;
+
+		delete FirstNode;
+
+	}
+
+	void DeleteLastNode()
+	{
+
+		if (Head == NULL)
+			return;
+
+
+		if (Head->next == NULL) {
+
+			delete Head;
+			Head = NULL;
+			return;
+		}
+
+		Node* Current = Head;
+
+		// this loop will Get the node before the last node
+		while (Current->next->next != NULL)
+			Current = Current->next;
+
+		Node* LastNode = Current->next;
+
+		Current->next = NULL;
+
+		delete LastNode;
+
+	}
 
 
 };
