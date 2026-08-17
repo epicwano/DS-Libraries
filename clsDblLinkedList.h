@@ -8,9 +8,17 @@ template <typename T>
 class clsDblLinkedList
 {
 
+private:
+
+	int _Size = 0;
+
+
 public:
 
-	struct Node {
+
+	class Node {
+
+	public:
 
 		Node* next;
 		T Value;
@@ -23,14 +31,14 @@ public:
 
 	Node* Find(T Value)
 	{
-		Node* TempHead = Head;
+		Node* Current = Head;
 
-		while (TempHead != NULL)
+		while (Current != NULL)
 		{
-			if (TempHead->Value == Value)
-				return TempHead;
+			if (Current->Value == Value)
+				return Current;
 
-			TempHead = TempHead->next;
+			Current = Current->next;
 
 		}
 
@@ -40,14 +48,15 @@ public:
 
 	void PrintList()
 	{
-		Node* TempHead = Head;
+		Node* Current = Head;
+
+		while (Current != NULL) {
+			cout << Current->Value << " ";
+			Current = Current->next;
+		}
 
 		cout << "\n";
-
-		while (TempHead != NULL) {
-			cout << TempHead->Value << " ";
-			TempHead = TempHead->next;
-		}
+		delete Current;
 
 	}
 
@@ -63,7 +72,7 @@ public:
 			Head->prev = NewNode;
 
 		Head = NewNode;
-
+		_Size++;
 	}
 
 	void InsertAfter(Node* Current, T Value)
@@ -81,7 +90,7 @@ public:
 			Current->next->prev = NewNode;
 
 		Current->next = NewNode;
-
+		_Size++;
 	}
 
 	void InsertAtEnd(T Value)
@@ -109,6 +118,8 @@ public:
 
 		}
 
+		_Size++;
+
 	}
 
 	void DeleteNode(Node*& NodeToDelete)
@@ -129,7 +140,7 @@ public:
 
 
 		delete NodeToDelete;
-
+		_Size--;
 	}
 
 	void DeleteFirstNode()
@@ -147,7 +158,7 @@ public:
 			Head->prev = NULL;
 
 		delete FirstNode;
-
+		_Size--;
 	}
 
 	void DeleteLastNode()
@@ -161,6 +172,7 @@ public:
 
 			delete Head;
 			Head = NULL;
+			_Size--;
 			return;
 		}
 
@@ -175,8 +187,14 @@ public:
 		Current->next = NULL;
 
 		delete LastNode;
-
+		_Size--;
 	}
+
+	short Size()
+	{
+		return _Size;
+	}
+
 
 
 };
