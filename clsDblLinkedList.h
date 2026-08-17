@@ -1,0 +1,114 @@
+#pragma once
+
+#include <iostream>
+
+using namespace std;
+
+template <typename T> 
+class clsDblLinkedList
+{
+
+public:
+
+	struct Node {
+
+		Node* next;
+		T Value;
+		Node* prev;
+	};
+
+	Node* Head = NULL;
+	
+	// Mehods
+
+	Node* Find(T Value)
+	{
+		Node* TempHead = Head;
+
+		while (TempHead != NULL)
+		{
+			if (TempHead->Value == Value)
+				return TempHead;
+
+			TempHead = TempHead->next;
+
+		}
+
+		return NULL;
+
+	}
+
+	void PrintList()
+	{
+		Node* TempHead = Head;
+
+		while (TempHead != NULL) {
+			cout << TempHead->Value << " ";
+			TempHead = TempHead->next;
+		}
+
+	}
+
+	void InsertAtBeginning(T Value)
+	{
+
+		Node* NewNode = new Node();
+		NewNode->Value = Value;
+		NewNode->next = Head;
+		NewNode->prev = NULL;
+
+		if (Head != NULL)
+			Head->prev = NewNode;
+
+		Head = NewNode;
+
+	}
+
+	void InsertAfter(Node* Current, T Value)
+	{
+		if (Current == NULL)
+			return;
+
+
+		Node* NewNode = new Node();
+		NewNode->Value = Value;
+		NewNode->prev = Current;
+		NewNode->next = Current->next;
+
+		if (Current->next != NULL)
+			Current->next->prev = NewNode;
+
+		Current->next = NewNode;
+
+	}
+
+	void InsertAtEnd(T Value)
+	{
+
+		Node* NewNode = new Node();
+		NewNode->Value = Value;
+		NewNode->next = NULL;
+
+		if (Head == NULL)
+		{
+
+			NewNode->prev = NULL;
+			Head = NewNode;
+		}
+		else {
+
+			Node* Current = Head;
+
+			while (Current->next != NULL)
+				Current = Current->next;
+
+			Current->next = NewNode;
+			NewNode->prev = Current;
+
+		}
+
+	}
+
+
+
+};
