@@ -247,7 +247,14 @@ public:
 
 	T GetItem(int Index)
 	{
-		return GetNode(Index)->Value;
+		
+		Node* ItemNode = GetNode(Index);
+
+		if (ItemNode == NULL)
+			return T{};
+		else
+			return ItemNode->Value;
+
 	}
 
 };
