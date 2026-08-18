@@ -12,7 +12,6 @@ private:
 
 	int _Size = 0;
 
-
 public:
 
 
@@ -204,6 +203,51 @@ public:
 	{
 		while (_Size > 0)
 			DeleteFirstNode();
+	}
+
+	void Reverse()
+	{
+
+		Node* Current = Head;
+		Node* Temp = nullptr;
+
+		while (Current != nullptr)
+		{
+			Temp = Current->prev;
+			Current->prev = Current->next;
+			Current->next = Temp;
+			Current = Current->prev;
+		}
+
+		if (Temp != nullptr)
+			Head = Temp->prev;
+	}
+
+	Node* GetNode(int Index)
+	{
+		int CurrentIndex = 0;
+
+		if (Index > _Size - 1 || Index < 0)
+			return nullptr;
+
+		Node* Current = Head;
+
+		while (Current != nullptr && (Current->next != nullptr)) {
+
+			if (CurrentIndex == Index)
+				break;
+
+			Current = Current->next;
+			CurrentIndex++;
+		}
+
+		return Current;
+
+	}
+
+	T GetItem(int Index)
+	{
+		return GetNode(Index)->Value;
 	}
 
 };
