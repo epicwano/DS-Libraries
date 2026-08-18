@@ -49,6 +49,39 @@ public:
 		_MyList.PrintList();
 	}
 
+	T GetItem(int index)
+	{
+		return _MyList.GetItem(index);
+	}
 
+	void Reverse()
+	{
+		_MyList.Reverse();
+	}
+
+	void UpdateItem(int index,T Value)
+	{
+		_MyList.UpdateItem(index, Value);
+	}
+
+	void InsertAfter(int index,T Value)
+	{
+		_MyList.InsertAfter(index, Value);
+	}
+
+	void InsertAtFront(T Value)
+	{
+		_MyList.InsertAtBeginning(Value);
+	}
+
+	void InsertAtBack(T Value)
+	{		
+		Push(Value);
+	}
+
+	void Clear()
+	{
+		_MyList.Clear();
+	}
 
 };
