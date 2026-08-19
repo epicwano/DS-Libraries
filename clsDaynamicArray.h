@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+
+
 using namespace std;
 
 template <class T> 
@@ -68,7 +70,6 @@ public:
 		if (NewSize < 0)
 			NewSize = 0;
 
-
 		_TempArr = new T[NewSize];
 
 		if (NewSize < _Size)
@@ -84,10 +85,36 @@ public:
 		OriginalArray = _TempArr;
 	}
 
-	T getItem(int index)
+	T GetItem(int index)
 	{
-			
+		if (index > _Size || index < 0)
+			return -1;
+
+		return OriginalArray[index];
 	}
 
+	void Revrese()
+	{
+		_TempArr = new T[_Size];
+
+		int Counter = 0;
+
+		for (int i = _Size - 1; i >= 0; i--) 
+		{
+			_TempArr[Counter] = OriginalArray[i];
+			Counter++;
+		}
+
+		delete[] OriginalArray;
+		OriginalArray = _TempArr;
+	}
+	
+	void Clear()
+	{
+		_Size = 0;
+		_TempArr = new T[0];
+		delete[] OriginalArray;
+		OriginalArray = _TempArr;
+	}
 
 };
